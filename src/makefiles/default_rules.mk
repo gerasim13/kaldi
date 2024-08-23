@@ -59,6 +59,10 @@ $(LIBFILE): $(LIBNAME).a
   ifeq ($(shell uname), Darwin)
 	$(CXX) -dynamiclib -o $@ -install_name @rpath/$@ $(LDFLAGS) $(OBJFILES) $(LDLIBS)
 	ln -sf $(shell pwd)/$@ $(KALDILIBDIR)/$@
+  else ifeq ($(LLVM_BUILD), 1)
+        # Building shared library from static (static was compiled with -fPIC) without soname
+	$(CXX) -shared -o $@ -Wl,--as-needed  -Wl,--whole-archive $(LIBNAME).a -Wl,--no-whole-archive $(LDFLAGS) $(LDLIBS)
+	ln -sf $(shell pwd)/$@ $(KALDILIBDIR)/$@
   else ifeq ($(shell uname), Linux)
         # Building shared library from static (static was compiled with -fPIC)
 	$(CXX) -shared -o $@ -Wl,--as-needed  -Wl,-soname=$@,--whole-archive $(LIBNAME).a -Wl,--no-whole-archive $(LDFLAGS) $(LDLIBS)
