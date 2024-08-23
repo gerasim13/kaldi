@@ -688,7 +688,7 @@ basic_filebuf<CharT, Traits>::sync() {
             }
         }
 #if _WIN32
-        if (fseek(_M_file_, -c, SEEK_CUR))
+        if (fseek(_M_file, -c, SEEK_CUR))
             return -1;
 #else
         if (fseeko(_M_file, -c, SEEK_CUR))
