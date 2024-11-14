@@ -26,6 +26,7 @@
 #include <cublas_v2.h>
 #include <cuda.h>
 #include <cuda_runtime_api.h>
+#include <cusparse.h>
 
 #include <string>
 #include <vector>
