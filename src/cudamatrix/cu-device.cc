@@ -26,11 +26,16 @@
 #include <cublas_v2.h>
 #include <cuda.h>
 #include <cuda_runtime_api.h>
+#include <curand.h>
 #include <cusparse.h>
-
 #include <string>
 #include <vector>
 #include <algorithm>
+
+#if CUDA_VERSION >= 9010
+#include <cusolverDn.h>
+#endif
+
 #ifndef _MSC_VER
 #include <dlfcn.h>
 #endif
